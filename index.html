@@ -1,0 +1,1113 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <title>SatyamNova.AI — AI in Cosmology Research</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #03070f;
+      --bg2: #060d1c;
+      --bg3: #0b1628;
+      --accent: #4a9eff;
+      --accent2: #a78bfa;
+      --accent3: #34d399;
+      --text: #e8edf5;
+      --muted: #8a9bb5;
+      --border: rgba(74,158,255,0.15);
+      --card: rgba(11,22,40,0.8);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* Stars background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 55% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 50%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 90%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(2px 2px at 70% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 55%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 35% 45%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 85%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 15%, rgba(255,255,255,0.5) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(3,7,15,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(74,158,255,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 820px; }
+
+    .hero-label {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(74,158,255,0.3);
+      padding: 0.4rem 1.2rem;
+      border-radius: 999px;
+      margin-bottom: 2rem;
+    }
+
+    h1.site-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #e8edf5 0%, #4a9eff 50%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 3rem;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--accent);
+      color: #03070f;
+      padding: 0.9rem 2.2rem;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .hero-cta:hover { opacity: 0.85; }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      margin-top: 5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 2rem;
+      color: var(--accent);
+      font-weight: 700;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    h2.section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 620px;
+      font-size: 1rem;
+      margin-bottom: 3.5rem;
+      line-height: 1.8;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0 auto;
+    }
+
+    /* ── CARDS ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .card:hover {
+      border-color: rgba(74,158,255,0.4);
+      transform: translateY(-3px);
+    }
+
+    .card-icon {
+      width: 44px; height: 44px;
+      background: rgba(74,158,255,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: var(--text);
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .card-tag {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(74,158,255,0.3);
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+    }
+
+    /* ── FEATURED ARTICLE ── */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .featured-grid { grid-template-columns: 1fr; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+    }
+
+    .featured-img-box {
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cosmos-svg { width: 100%; height: 100%; }
+
+    .featured-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .featured-content p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .read-more {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+
+    .read-more:hover { gap: 0.7rem; }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 2.5rem; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.5rem; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.15rem;
+      top: 0.4rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .timeline-year {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-item h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-item p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── TOOLS TABLE ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .tool-chip {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+    }
+
+    .tool-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .tool-chip h4 {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.1rem;
+    }
+
+    .tool-chip span {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── RESEARCH HIGHLIGHTS ── */
+    .research-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .research-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+      transition: border-color 0.2s;
+    }
+
+    .research-item:hover { border-color: rgba(167,139,250,0.4); }
+
+    .research-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent2);
+      padding-top: 0.2rem;
+    }
+
+    .research-item h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .research-item p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .research-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .badge-ml { background: rgba(74,158,255,0.12); color: #4a9eff; border: 1px solid rgba(74,158,255,0.25); }
+    .badge-dl { background: rgba(167,139,250,0.12); color: #a78bfa; border: 1px solid rgba(167,139,250,0.25); }
+    .badge-nlp { background: rgba(52,211,153,0.12); color: #34d399; border: 1px solid rgba(52,211,153,0.25); }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      max-width: 100%;
+      padding: 6rem 4rem;
+    }
+
+    .contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      #contact { padding: 4rem 1.5rem; }
+      .research-item { grid-template-columns: auto 1fr; }
+      .research-badge { display: none; }
+      .hero-stats { gap: 1.5rem; }
+    }
+
+    .contact-info h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-icon {
+      width: 40px; height: 40px;
+      background: rgba(74,158,255,0.1);
+      border: 1px solid rgba(74,158,255,0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-detail a { color: var(--text); text-decoration: none; font-size: 0.9rem; }
+    .contact-detail a:hover { color: var(--accent); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 1.1rem;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--accent); }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: var(--muted); }
+
+    .contact-form textarea { resize: vertical; min-height: 120px; }
+
+    .form-btn {
+      background: var(--accent);
+      color: #03070f;
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+
+    .form-btn:hover { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2.5rem 4rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    .footer-logo {
+      font-family: 'Space Mono', monospace;
+      color: var(--accent);
+      font-size: 1rem;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── QUOTE BLOCK ── */
+    .quote-block {
+      border-left: 3px solid var(--accent2);
+      padding: 1.5rem 2rem;
+      background: rgba(167,139,250,0.05);
+      border-radius: 0 12px 12px 0;
+      margin: 3rem 0;
+    }
+
+    .quote-block blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+      line-height: 1.6;
+    }
+
+    .quote-block cite {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: normal;
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* ── BIG NUMBERS ── */
+    .big-numbers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .big-num-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .big-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .big-num-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">SatyamNova.AI</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#tools">AI Tools</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <span class="hero-label">AI × Cosmology Research</span>
+    <h1 class="site-title">SatyamNova.AI</h1>
+    <p class="hero-sub">
+      Exploring how artificial intelligence is transforming the way we understand the universe — from dark matter detection to gravitational wave analysis and beyond.
+    </p>
+    <a href="#about" class="hero-cta">Explore the Universe ↓</a>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">13.8B</span>
+        <span class="stat-label">Years — Age of Universe</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">27%</span>
+        <span class="stat-label">Dark Matter in Universe</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">10⁸⁰</span>
+        <span class="stat-label">Observable Atoms</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2M+</span>
+        <span class="stat-label">Galaxies Mapped by AI</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <span class="section-label">Introduction</span>
+  <h2 class="section-title">Why AI in Cosmology?</h2>
+  <p class="section-desc">
+    Modern telescopes like the James Webb Space Telescope and the Vera C. Rubin Observatory generate terabytes of data every night. No team of humans can process this at scale. Artificial intelligence has become the essential partner in reading the cosmos.
+  </p>
+
+  <div class="featured-grid">
+    <div class="featured-img-box">
+      <!-- Generative cosmos SVG -->
+      <svg class="cosmos-svg" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="gal" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#4a9eff" stop-opacity="0.8"/>
+            <stop offset="40%" stop-color="#a78bfa" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#03070f" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="star1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#4a9eff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="500" height="380" fill="#03070f"/>
+        <!-- Stars -->
+        <circle cx="45" cy="30" r="1" fill="white" opacity="0.7"/>
+        <circle cx="120" cy="80" r="1.5" fill="white" opacity="0.5"/>
+        <circle cx="300" cy="20" r="1" fill="white" opacity="0.8"/>
+        <circle cx="420" cy="60" r="1" fill="white" opacity="0.6"/>
+        <circle cx="80" cy="150" r="1" fill="white" opacity="0.4"/>
+        <circle cx="460" cy="120" r="1.5" fill="white" opacity="0.7"/>
+        <circle cx="200" cy="340" r="1" fill="white" opacity="0.5"/>
+        <circle cx="380" cy="310" r="1" fill="white" opacity="0.6"/>
+        <circle cx="60" cy="280" r="1.5" fill="white" opacity="0.4"/>
+        <circle cx="490" cy="250" r="1" fill="white" opacity="0.7"/>
+        <circle cx="15" cy="200" r="1" fill="white" opacity="0.5"/>
+        <circle cx="260" cy="360" r="1" fill="white" opacity="0.6"/>
+        <circle cx="340" cy="150" r="1" fill="white" opacity="0.4"/>
+        <circle cx="160" cy="200" r="1" fill="white" opacity="0.5"/>
+        <!-- Galaxy spiral -->
+        <ellipse cx="250" cy="190" rx="130" ry="50" fill="url(#gal)" opacity="0.9"/>
+        <ellipse cx="250" cy="190" rx="80" ry="30" fill="url(#gal)" opacity="0.7"/>
+        <ellipse cx="250" cy="190" rx="30" ry="12" fill="#ffffff" opacity="0.15"/>
+        <circle cx="250" cy="190" r="8" fill="url(#star1)" opacity="0.9"/>
+        <!-- AI neural net overlay -->
+        <line x1="80" y1="80" x2="200" y2="140" stroke="#4a9eff" stroke-width="0.5" opacity="0.3"/>
+        <line x1="200" y1="140" x2="320" y2="100" stroke="#4a9eff" stroke-width="0.5" opacity="0.3"/>
+        <line x1="320" y1="100" x2="420" y2="160" stroke="#4a9eff" stroke-width="0.5" opacity="0.3"/>
+        <line x1="200" y1="140" x2="280" y2="260" stroke="#a78bfa" stroke-width="0.5" opacity="0.25"/>
+        <line x1="280" y1="260" x2="400" y2="300" stroke="#a78bfa" stroke-width="0.5" opacity="0.25"/>
+        <circle cx="80" cy="80" r="3" fill="#4a9eff" opacity="0.6"/>
+        <circle cx="200" cy="140" r="4" fill="#4a9eff" opacity="0.7"/>
+        <circle cx="320" cy="100" r="3" fill="#4a9eff" opacity="0.6"/>
+        <circle cx="420" cy="160" r="3" fill="#4a9eff" opacity="0.5"/>
+        <circle cx="280" cy="260" r="3" fill="#a78bfa" opacity="0.6"/>
+        <circle cx="400" cy="300" r="3" fill="#a78bfa" opacity="0.5"/>
+        <!-- Label -->
+        <text x="250" y="358" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" fill="#4a9eff" opacity="0.6" letter-spacing="3">AI-MAPPED GALACTIC STRUCTURE</text>
+      </svg>
+    </div>
+    <div class="featured-content">
+      <h3>The Data Explosion in Modern Astronomy</h3>
+      <p>The Sloan Digital Sky Survey (SDSS) captured 14 terabytes of data in 15 years. The Vera C. Rubin Observatory's LSST will generate that much in a single night. Traditional analysis pipelines can't keep up — and that's where deep learning, neural networks, and transformer models step in.</p>
+      <p>AI systems now classify galaxies with 98% accuracy, detect faint exoplanet transits buried in stellar noise, and predict gravitational lensing effects far faster than traditional code. Machine learning has become as fundamental to cosmology as the telescope itself.</p>
+      <a href="#research" class="read-more">Explore the research →</a>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <blockquote>"Artificial intelligence is not just a tool for astronomy — it is becoming the primary lens through which we interpret the universe."</blockquote>
+    <cite>— Dr. Michelle Ntampaka, Space Telescope Science Institute</cite>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESEARCH -->
+<section id="research">
+  <span class="section-label">Core Research Areas</span>
+  <h2 class="section-title">Where AI Meets the Cosmos</h2>
+  <p class="section-desc">Six major frontiers where machine learning and deep learning are actively reshaping our understanding of the universe.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🌑</div>
+      <h3>Dark Matter Detection</h3>
+      <p>Deep neural networks analyze gravitational lensing patterns in galaxy clusters to infer the distribution of invisible dark matter. Models like DeepLens can reconstruct dark matter maps 10,000× faster than traditional methods while maintaining comparable accuracy.</p>
+      <span class="card-tag">CNN • Lensing Analysis</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌊</div>
+      <h3>Gravitational Wave Detection</h3>
+      <p>LIGO and Virgo use ML algorithms to distinguish genuine gravitational wave signals from Earth-based noise. Convolutional neural networks now detect binary black hole mergers in near real-time, reducing analysis time from hours to seconds.</p>
+      <span class="card-tag">Signal Processing • CNN</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌌</div>
+      <h3>Galaxy Classification</h3>
+      <p>The Galaxy Zoo project and transformer-based models classify galaxy morphologies (spiral, elliptical, irregular) across millions of SDSS images. AI has catalogued more galaxies in five years than astronomers did in the previous century.</p>
+      <span class="card-tag">Computer Vision • Transfer Learning</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔭</div>
+      <h3>Exoplanet Discovery</h3>
+      <p>NASA's Kepler and TESS missions use neural networks to search light curves for the tiny dips caused by planetary transits. Google's AstroNet model discovered two previously missed exoplanets in Kepler data using a 1D CNN architecture.</p>
+      <span class="card-tag">Time-Series • AstroNet</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">💥</div>
+      <h3>Supernova Classification</h3>
+      <p>Recurrent neural networks and random forests classify supernovae types (Type Ia, Ib, II) from photometric light curves without spectrographic confirmation — enabling rapid cosmological distance measurements for dark energy studies.</p>
+      <span class="card-tag">RNN • Photometric Survey</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌠</div>
+      <h3>Cosmic Microwave Background</h3>
+      <p>Generative adversarial networks (GANs) and variational autoencoders analyze CMB temperature maps from Planck satellite data, detecting subtle primordial fluctuations that constrain inflation models and the shape of the early universe.</p>
+      <span class="card-tag">GAN • Planck Data • VAE</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KEY NUMBERS -->
+<section>
+  <span class="section-label">By the Numbers</span>
+  <h2 class="section-title">Scale of AI in Astrophysics</h2>
+  <p class="section-desc">The numbers behind the machine learning revolution in cosmological science.</p>
+
+  <div class="big-numbers">
+    <div class="big-num-card">
+      <span class="big-num">15 TB</span>
+      <span class="big-num-label">Data generated per night by Vera C. Rubin Observatory LSST</span>
+    </div>
+    <div class="big-num-card">
+      <span class="big-num">98.7%</span>
+      <span class="big-num-label">Galaxy classification accuracy achieved by Vision Transformers</span>
+    </div>
+    <div class="big-num-card">
+      <span class="big-num">5,000×</span>
+      <span class="big-num-label">Speedup of N-body simulations using ML emulators vs direct methods</span>
+    </div>
+    <div class="big-num-card">
+      <span class="big-num">90+</span>
+      <span class="big-num-label">Gravitational wave events detected using ML pipelines (2015–2024)</span>
+    </div>
+    <div class="big-num-card">
+      <span class="big-num">200M+</span>
+      <span class="big-num-label">Stars catalogued by Gaia with AI-assisted classification</span>
+    </div>
+  </div>
+
+  <!-- Research Papers / Highlights -->
+  <div class="research-list">
+    <div class="research-item">
+      <span class="research-num">01</span>
+      <div>
+        <h3>Neural Networks for Weak Gravitational Lensing</h3>
+        <p>Researchers at ETH Zurich trained a CNN on simulated dark matter halos to infer mass distributions from observed shear fields. The model reduced reconstruction error by 40% compared to traditional quadratic estimators, opening new pathways to map large-scale cosmic structure.</p>
+      </div>
+      <span class="research-badge badge-dl">Deep Learning</span>
+    </div>
+    <div class="research-item">
+      <span class="research-num">02</span>
+      <div>
+        <h3>Transformer Models for Spectral Redshift Estimation</h3>
+        <p>Photometric redshift estimation is critical for mapping the 3D universe. Vision Transformer architectures trained on multi-band photometry from DES (Dark Energy Survey) outperform template-fitting codes by 18%, dramatically improving galaxy distance measurements without spectroscopy.</p>
+      </div>
+      <span class="research-badge badge-ml">Machine Learning</span>
+    </div>
+    <div class="research-item">
+      <span class="research-num">03</span>
+      <div>
+        <h3>LLMs Parsing Astronomical Literature</h3>
+        <p>Large language models are being fine-tuned on arXiv astrophysics papers to build automated knowledge graphs linking observational data to theoretical predictions. The AstroLLM project at NASA aims to create an AI co-pilot for telescope proposal writing and data interpretation.</p>
+      </div>
+      <span class="research-badge badge-nlp">NLP / LLMs</span>
+    </div>
+    <div class="research-item">
+      <span class="research-num">04</span>
+      <div>
+        <h3>Simulation-Based Inference for Cosmological Parameters</h3>
+        <p>Normalizing flows and neural posterior estimation (NPE) replace traditional MCMC sampling to constrain cosmological parameters like Hubble constant H₀ and matter density Ωm. These methods are 100–1000× faster and handle intractable likelihoods that stall conventional samplers.</p>
+      </div>
+      <span class="research-badge badge-dl">Probabilistic ML</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AI TOOLS -->
+<section id="tools">
+  <span class="section-label">AI Tools & Frameworks</span>
+  <h2 class="section-title">The Astronomer's AI Toolkit</h2>
+  <p class="section-desc">A curated overview of the machine learning architectures, frameworks, and specialized libraries actively used in computational cosmology.</p>
+
+  <div class="tools-grid">
+    <div class="tool-chip">
+      <div class="tool-dot" style="background:#4a9eff;"></div>
+      <div>
+        <h4>TensorFlow / Keras</h4>
+        <span>Deep learning framework for CNN & RNN pipelines</span>
+      </div>
+    </div>
+    <div class="tool-chip">
+      <div class="tool-dot" style="background:#a78bfa;"></div>
+      <div>
+        <h4>PyTorch + Astropy</h4>
+        <span>Dynamic graphs paired with astronomy data I/O</span>
+      </div>
+    </div>
+    <div class="tool-chip">
+      <div class="tool-dot" style="background:#34d399;"></div>
+      <div>
+        <h4>JAX / Flax</h4>
+        <span>GPU-accelerated cosmological simulations & inference</span>
+      </div>
+    </div>
+    <div class="tool-chip">
+      <div class="tool-dot" style="background:#f59e0b;"></div>
+      <div>
+        <h4>AstroML</h4>
+        <span>Scikit-learn style ML for astronomical datasets</span>
+      </div>
+    </div>
+    <div class="tool-chip">
+      <div class="tool-dot" style="background:#f87171;"></div>
+      <div>
+        <h4>GalSim</h4>
+        <span>Galaxy image simulations for training data generation</span>
+      </div>
+    </div>
+    <div class="tool-chip">
+      <div class="tool-dot" style="background:#4a9eff;"></div>
+      <div>
+        <h4>PyCBC / GWpy</h4>
+        <span>Gravitational wave signal processing with ML</span>
+      </div>
+    </div>
+    <div class="tool-chip">
+      <div class="tool-dot" style="background:#a78bfa;"></div>
+      <div>
+        <h4>sbi (SBI Library)</h4>
+        <span>Simulation-based inference for posterior estimation</span>
+      </div>
+    </div>
+    <div class="tool-chip">
+      <div class="tool-dot" style="background:#34d399;"></div>
+      <div>
+        <h4>CAMELS + IllustrisTNG</h4>
+        <span>N-body simulation suites for ML training data</span>
+      </div>
+    </div>
+    <div class="tool-chip">
+      <div class="tool-dot" style="background:#f59e0b;"></div>
+      <div>
+        <h4>DeepLense</h4>
+        <span>CNN-based gravitational strong lensing analysis</span>
+      </div>
+    </div>
+    <div class="tool-chip">
+      <div class="tool-dot" style="background:#f87171;"></div>
+      <div>
+        <h4>RAPIDS cuML</h4>
+        <span>GPU clustering for large-scale galaxy survey catalogs</span>
+      </div>
+    </div>
+    <div class="tool-chip">
+      <div class="tool-dot" style="background:#4a9eff;"></div>
+      <div>
+        <h4>Hugging Face Transformers</h4>
+        <span>Pre-trained models adapted for spectral classification</span>
+      </div>
+    </div>
+    <div class="tool-chip">
+      <div class="tool-dot" style="background:#a78bfa;"></div>
+      <div>
+        <h4>emcee / PyMC</h4>
+        <span>Bayesian inference for parameter estimation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <span class="section-label">History</span>
+  <h2 class="section-title">AI in Cosmology: Key Milestones</h2>
+  <p class="section-desc">A journey from basic neural networks in the 1990s to today's foundation models reshaping how we map the universe.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">1992</div>
+      <h3>Neural Networks Enter Astronomy</h3>
+      <p>Early artificial neural networks are applied to star/galaxy separation in photometric surveys. The first papers demonstrate that 3-layer perceptrons can classify objects in digitized sky plates with human-level accuracy.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2001</div>
+      <h3>SDSS Launches + Data-Driven Astronomy Begins</h3>
+      <p>The Sloan Digital Sky Survey begins operations, creating the first large-scale digital sky catalog. Machine learning methods are applied to photometric redshift estimation and quasar classification, establishing the template for modern AI pipelines.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2007</div>
+      <h3>Galaxy Zoo: Citizen Science + AI</h3>
+      <p>The Galaxy Zoo project launches, using crowdsourced classifications of SDSS galaxies to generate training labels for machine learning models. The dataset becomes a foundational benchmark for astronomical image classification.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2015</div>
+      <h3>Deep Learning Detects Gravitational Waves</h3>
+      <p>LIGO detects the first gravitational waves from a binary black hole merger. Within two years, deep learning pipelines supplement matched-filter searches, enabling faster detection and lower-significance event recovery.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2019</div>
+      <h3>First Image of a Black Hole — AI Assists</h3>
+      <p>The Event Horizon Telescope releases the first image of a black hole (M87*). Machine learning algorithms assist in reconstructing the image from sparse VLBI interferometric data — a technique known as CLEAN and its successors including neural network-based CLEAN variants.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <h3>James Webb Space Telescope + AI Analysis</h3>
+      <p>JWST delivers unprecedented infrared images of the early universe. AI pipelines for dust emission removal, source extraction, and redshift estimation are deployed immediately, allowing rapid scientific publication within weeks of data release.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2023–Present</div>
+      <h3>Foundation Models & Simulation-Based Inference</h3>
+      <p>Large language models are fine-tuned on astrophysics literature. Normalizing flows replace MCMC for cosmological inference. The Rubin Observatory's LSST prepares to deploy full ML classification pipelines processing 10 million alerts per night from 2025 onward.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" style="max-width:100%;">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <span class="section-label">Get In Touch</span>
+      <h2 class="section-title" style="font-size:2.2rem;">Let's Discuss the Cosmos</h2>
+      <p>Have questions about AI in cosmology research, collaboration opportunities, or just want to talk about the universe? Reach out directly.</p>
+
+      <div class="contact-detail">
+        <div class="contact-icon">✉</div>
+        <div>
+          <span style="font-size:0.75rem; color:var(--muted); display:block; margin-bottom:0.2rem;">Email</span>
+          <a href="mailto:satyamtripathi285@gmail.com">satyamtripathi285@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="contact-icon">📞</div>
+        <div>
+          <span style="font-size:0.75rem; color:var(--muted); display:block; margin-bottom:0.2rem;">Phone</span>
+          <a href="tel:+918604632170">+91 86046 32170</a>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="contact-icon">🌐</div>
+        <div>
+          <span style="font-size:0.75rem; color:var(--muted); display:block; margin-bottom:0.2rem;">Focus Area</span>
+          <span style="font-size:0.9rem; color:var(--text);">AI Integration in Cosmological Research</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="contact-form">
+        <input type="text" placeholder="Your name" />
+        <input type="email" placeholder="Your email address" />
+        <input type="text" placeholder="Subject" />
+        <textarea placeholder="Your message — ask about research, collaborations, or anything cosmic..."></textarea>
+        <button class="form-btn">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">SatyamNova.AI</span>
+  <p style="margin-bottom:0.5rem;">Exploring the intersection of artificial intelligence and cosmology research.</p>
+  <p>
+    <a href="mailto:satyamtripathi285@gmail.com">satyamtripathi285@gmail.com</a> &nbsp;·&nbsp;
+    <a href="tel:+918604632170">+91 86046 32170</a> &nbsp;·&nbsp;
+    <span>© 2025 SatyamNova.AI</span>
+  </p>
+</footer>
+
+</body>
+</html>
